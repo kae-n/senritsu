@@ -93,6 +93,7 @@ function renderDay(i) {
     const card = document.createElement('a');
     card.className = 'schedule-card';
     card.href = `profile/${t.id}.html`;
+    card.dataset.id = t.id;
     card.innerHTML =
       `<div class="schedule-photo"><span class="photo-placeholder">Photo</span></div>` +
       `<div class="schedule-body">` +
