@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旋律 -Senritsu- | 岸和田のメンズヒーリングサロン</title>
+<meta name="description" content="クラシックの旋律に包まれて、心と身体をほどく。岸和田のメンズヒーリングサロン「旋律」。緑と白に満ちた癒しの空間で、極上のひとときをお過ごしください。">
+
+<!-- canonical / favicon -->
+<link rel="canonical" href="https://senritu.jp/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- OGP（SNS・LINEでシェアされたときの表示。ogp.jpg は 1200x630px の画像を用意して差し替えてください） -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://senritu.jp/">
+<meta property="og:title" content="旋律 -Senritsu- | 岸和田のメンズヒーリングサロン">
+<meta property="og:description" content="クラシックの旋律に包まれて、心と身体をほどく。岸和田のメンズヒーリングサロン「旋律」。緑と白に満ちた癒しの空間で、極上のひとときをお過ごしください。">
+<meta property="og:image" content="https://senritu.jp/ogp.jpg">
+<meta property="og:site_name" content="メンズヒーリングサロン 旋律">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- 構造化データ（Googleの地域検索向け） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "メンズヒーリングサロン 旋律",
+  "alternateName": "Senritsu",
+  "description": "クラシック音楽の流れる岸和田のメンズヒーリングサロン。",
+  "url": "https://senritu.jp/",
+  "telephone": "+81-70-1840-4612",
+  "image": "https://senritu.jp/ogp.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "大阪府",
+    "addressLocality": "岸和田市",
+    "addressCountry": "JP"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "10:00",
+    "closes": "02:00"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ローディング（五線譜と音符） -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <span class="loader-note">♪</span>
+    <p class="loader-text">Senritsu</p>
+  </div>
+</div>
+
+<!-- ヘッダー -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">♪</span>
+      <span class="logo-text">旋律<small>-Senritsu-</small></span>
+    </a>
+    <nav class="gnav" id="gnav">
+      <ul>
+        <li><a href="#top"><span>Top</span>トップ</a></li>
+        <li><a href="#concept"><span>Concept</span>コンセプト</a></li>
+        <li><a href="#schedule"><span>Schedule</span>出勤情報</a></li>
+        <li><a href="#news"><span>News</span>新着情報</a></li>
+        <li><a href="#therapist"><span>Therapist</span>セラピスト</a></li>
+        <li><a href="#system"><span>System</span>料金システム</a></li>
+        <li><a href="#blog"><span>Blog</span>ブログ</a></li>
+        <li><a href="#access"><span>Access</span>アクセス</a></li>
+        <li><a href="#" class="nav-reserve">ご予約<span class="nav-reserve-en">Reserve</span></a></li>
+      </ul>
+    </nav>
+    <div class="header-info">
+      <p class="header-open">OPEN 10:00 - 翌2:00</p>
+      <a href="tel:07018404612" class="header-tel">070-1840-4612</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- BGMトグル -->
+<button class="bgm-toggle" id="bgmToggle" aria-label="クラシックBGMを再生">
+  <span class="bgm-icon">♪</span>
+  <span class="bgm-label">BGM</span>
+</button>
+<!-- お手持ちのライセンス音源（例: サティ「ジムノペディ第1番」等）を audio/bgm.mp3 に配置してください -->
+<audio id="bgmAudio" src="audio/bgm.mp3" loop preload="none"></audio>
+
+<main>
+
+<!-- ヒーロー -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-leaf hero-leaf-1"></div>
+    <div class="hero-leaf hero-leaf-2"></div>
+    <div class="staff-lines" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="floating-notes" aria-hidden="true">
+      <i>♪</i><i>♩</i><i>♫</i><i>♪</i><i>♬</i><i>♩</i>
+    </div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-sub fade-up">Men's Healing Salon in Kishiwada</p>
+    <h1 class="hero-title fade-up">
+      <span class="hero-title-line">クラシックの旋律に</span>
+      <span class="hero-title-line">包まれて、心をほどく。</span>
+    </h1>
+    <p class="hero-lead fade-up">
+      緑と白に満ちた静かな空間。<br>
+      やわらかな調べとともに、極上の癒しのひとときを。
+    </p>
+    <div class="hero-btns fade-up">
+      <a href="#" class="btn btn-primary">ネット予約はこちら</a>
+      <a href="#concept" class="btn btn-ghost">サロンについて</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span></div>
+</section>
+
+<!-- コンセプト -->
+<section class="concept section" id="concept">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">Concept</p>
+      <h2 class="sec-ja">コンセプト</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-text fade-up">
+        <h3 class="concept-catch">
+          一曲の調べのように、<br>あなたの時間がやさしく流れていく。
+        </h3>
+        <p>
+          「旋律」は、クラシック音楽の流れるヒーリングサロンです。<br>
+          扉を開けた瞬間に広がるのは、深い緑とやわらかな白に包まれた静寂の空間。
+          ピアノや弦楽の調べに身をゆだねながら、熟練セラピストによる丁寧な施術で、
+          日々の疲れを音もなくほどいていきます。
+        </p>
+        <p>
+          忙しい毎日に、楽章のあいだの休符のような時間を。<br>
+          岸和田「旋律」で、最高の癒しを奏でてみてください。
+        </p>
+      </div>
+      <div class="concept-features fade-up">
+        <div class="feature-card">
+          <span class="feature-icon">♬</span>
+          <h4>クラシックの調べ</h4>
+          <p>厳選したクラシックの名曲が、静かに空間を満たします。</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">❧</span>
+          <h4>緑に癒される空間</h4>
+          <p>グリーンと白を基調にした、森の中のような安らぎの内装。</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">✦</span>
+          <h4>確かな技術</h4>
+          <p>研修を重ねたセラピストが、お一人おひとりに合わせて施術。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 本日の出勤 -->
+<section class="schedule section section-tinted" id="schedule">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">Schedule</p>
+      <h2 class="sec-ja">本日の出勤情報</h2>
+    </div>
+    <div class="schedule-list">
+      <article class="schedule-card fade-up">
+        <div class="schedule-photo"><span class="photo-placeholder">Photo</span></div>
+        <div class="schedule-body">
+          <p class="schedule-status">予約受付中</p>
+          <h3 class="schedule-name">月山 ひめか <small>(26)</small></h3>
+          <p class="schedule-meta">身長 150cm</p>
+          <p class="schedule-time">♪ 14:00 - 翌2:00</p>
+          <div class="tags">
+            <span class="tag">むちむちギャル</span><span class="tag">リアル人妻</span><span class="tag">どえらい愛嬌</span>
+          </div>
+        </div>
+      </article>
+      <article class="schedule-card fade-up">
+        <div class="schedule-photo"><span class="photo-placeholder">Photo</span></div>
+        <div class="schedule-body">
+          <p class="schedule-status">予約受付中</p>
+          <h3 class="schedule-name">岩本 まる <small>(33)</small></h3>
+          <p class="schedule-meta">身長 155cm</p>
+          <p class="schedule-time">♪ 19:30 - 翌2:00</p>
+          <div class="tags">
+            <span class="tag">ふくよか</span><span class="tag">包容力抜群</span><span class="tag">接客対応良し</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="sec-more fade-up">
+      <a href="schedule.html" class="btn btn-outline">出勤情報をすべて見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 新着情報 -->
+<section class="news section" id="news">
+  <div class="container container-narrow">
+    <div class="sec-head fade-up">
+      <p class="sec-en">News</p>
+      <h2 class="sec-ja">新着情報</h2>
+    </div>
+    <ul class="news-list fade-up">
+      <li><a href="#"><time datetime="2026-06-12">2026.06.12</time><span class="news-tag">出勤</span><p>月山ひめか(26)／14時よりご案内可能です ♪</p></a></li>
+      <li><a href="#"><time datetime="2026-06-12">2026.06.12</time><span class="news-tag">出勤</span><p>岩本まる(33)／19時30分よりご案内可能です ♪</p></a></li>
+      <li><a href="#"><time datetime="2026-06-12">2026.06.12</time><span class="news-tag news-tag-event">イベント</span><p>イベント実施中 ♪ 詳しくはイベントページをご覧ください。</p></a></li>
+    </ul>
+    <div class="sec-more fade-up">
+      <a href="#" class="btn btn-outline">新着情報をもっと見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- セラピスト -->
+<section class="therapist section section-tinted" id="therapist">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">Therapist</p>
+      <h2 class="sec-ja">セラピスト</h2>
+    </div>
+    <div class="therapist-grid">
+      <a class="t-card fade-up" href="profile/20.html" data-id="20">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>本条 まりん <small>(24)</small></h3><p class="t-height">身長 157cm</p>
+        <div class="tags"><span class="tag">至高のスタイル</span><span class="tag">女神</span><span class="tag">愛嬌抜群</span><span class="tag">完全未経験</span></div>
+        <p class="t-comment">誰もが振り返る美しい容姿に加え、女性らしさが際立つ魅力。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/27.html" data-id="27">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>月山 ひめか <small>(26)</small></h3><p class="t-height">身長 150cm</p>
+        <div class="tags"><span class="tag">むちむちギャル</span><span class="tag">リアル人妻</span><span class="tag">どえらい愛嬌</span><span class="tag">ノリしか勝たん</span></div>
+        <p class="t-comment">笑顔も癒しも満点級。会えばわかる、月山ひめかという特別な存在。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/26.html" data-id="26">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>園田 なつ <small>(28)</small></h3><p class="t-height">身長 160cm</p>
+        <div class="tags"><span class="tag">真面目ちゃん</span><span class="tag">完全未経験</span><span class="tag">グラマー</span><span class="tag">小手先の使い手</span></div>
+        <p class="t-comment">オリヴィエ・メシアンが描いた幻想世界のように、静かに深く心へ残っていくでしょう。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/25.html" data-id="25">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>桃瀬 くるみ <small>(33)</small></h3><p class="t-height">身長 169cm</p>
+        <div class="tags"><span class="tag">神スタイル</span><span class="tag">リアル美人</span><span class="tag">最強人気候補</span><span class="tag">店長イチオシ</span></div>
+        <p class="t-comment">まるでマンガの世界からそのまま抜け出してきたかのような奇跡の存在——</p>
+      </a>
+      <a class="t-card fade-up" href="profile/24.html" data-id="24">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>甘露寺 りず <small>(30)</small></h3><p class="t-height">身長 160cm</p>
+        <div class="tags"><span class="tag">リアルビーナス</span><span class="tag">魅力の塊</span><span class="tag">オーナー超おすすめ</span><span class="tag">超レア出勤</span></div>
+        <p class="t-comment">一度出会えば、もう戻れない——。その名を聞くだけで胸が高鳴る、まさに“虜になる存在”。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/23.html" data-id="23">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>有村 ひな <small>(24)</small></h3><p class="t-height">身長 149cm</p>
+        <div class="tags"><span class="tag">ミニマムキュート</span><span class="tag">最強スレンダー</span><span class="tag">愛嬌抜群</span><span class="tag">超美人</span></div>
+        <p class="t-comment">クロード・ドビュッシーの音色のように甘く、深く、心を溶かしていきます。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/9.html" data-id="9">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>天河 りり <small>(24)</small></h3><p class="t-height">身長 155cm</p>
+        <div class="tags"><span class="tag">可愛い系</span><span class="tag">テクニシャン</span><span class="tag">愛嬌抜群</span><span class="tag">店長イチオシ</span></div>
+        <p class="t-comment">彼女が奏でるマッサージはまるでモーツァルト！</p>
+      </a>
+      <a class="t-card fade-up" href="profile/17.html" data-id="17">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>佐々木 のあ <small>(22)</small></h3><p class="t-height">身長 155cm</p>
+        <div class="tags"><span class="tag">可愛い系</span><span class="tag">超絶癒し系</span><span class="tag">センス抜群</span><span class="tag">店長イチオシ</span></div>
+        <p class="t-comment">あなたの疲れに寄り添う、若き癒しの演奏者。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/21.html" data-id="21">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>西園寺 さゆ <small>(29)</small></h3><p class="t-height">身長 161cm</p>
+        <div class="tags"><span class="tag">究極の萌え声</span><span class="tag">完全未経験</span><span class="tag">超色白スレンダー</span><span class="tag">人当たり最高</span></div>
+        <p class="t-comment">指先まで丁寧に行き届いたマッサージは、まるでヘンデルの音色のよう♪</p>
+      </a>
+      <a class="t-card fade-up" href="profile/22.html" data-id="22">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>利根川 まき <small>(38)</small></h3><p class="t-height">身長 155cm</p>
+        <div class="tags"><span class="tag">美魔女</span><span class="tag">鬼テクニシャン</span><span class="tag">色気ムンムン</span><span class="tag">癒しの極意</span></div>
+        <p class="t-comment">まるでラフマニノフの旋律のように深く、甘く、そして情熱的。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/19.html" data-id="19">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>岩本 まる <small>(33)</small></h3><p class="t-height">身長 155cm</p>
+        <div class="tags"><span class="tag">ふくよか</span><span class="tag">包容力抜群</span><span class="tag">接客対応良し</span><span class="tag">超爆乳</span></div>
+        <p class="t-comment">エリック・サティの音楽のような、派手さはないけれど、気づけば心に深く染み込む癒し。</p>
+      </a>
+      <a class="t-card fade-up" href="profile/11.html" data-id="11">
+        <div class="t-photo"><span class="photo-placeholder">Photo</span></div>
+        <h3>黒瀬 みく <small>(26)</small></h3><p class="t-height">身長 159cm</p>
+        <div class="tags"><span class="tag">魅力満点</span><span class="tag">スタイル抜群</span><span class="tag">清楚系〇〇〇</span><span class="tag">ノリ抜群</span></div>
+        <p class="t-comment">まるでマックス・ブルッフの旋律のように、心と身体の奥深くまで優しく響き渡ります。</p>
+      </a>
+    </div>
+    <div class="sec-more fade-up">
+      <a href="#" class="btn btn-outline">セラピスト一覧へ</a>
+    </div>
+  </div>
+</section>
+
+<!-- 料金システム -->
+<section class="system section" id="system">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">System</p>
+      <h2 class="sec-ja">料金システム</h2>
+    </div>
+    <div class="system-grid">
+      <div class="system-card fade-up">
+        <p class="system-course-en">Sonata</p>
+        <h3>ソナタコース</h3>
+        <p class="system-time">60分</p>
+        <p class="system-price">¥00,000<small>（税込）</small></p>
+        <p class="system-desc">はじめての方におすすめの基本コース。</p>
+      </div>
+      <div class="system-card system-card-featured fade-up">
+        <p class="system-badge">人気No.1</p>
+        <p class="system-course-en">Symphony</p>
+        <h3>シンフォニーコース</h3>
+        <p class="system-time">90分</p>
+        <p class="system-price">¥00,000<small>（税込）</small></p>
+        <p class="system-desc">全身をじっくりほぐす、当店いちばんの人気コース。</p>
+      </div>
+      <div class="system-card fade-up">
+        <p class="system-course-en">Rhapsody</p>
+        <h3>ラプソディコース</h3>
+        <p class="system-time">120分</p>
+        <p class="system-price">¥00,000<small>（税込）</small></p>
+        <p class="system-desc">時間を忘れて癒されたい方へ、贅沢なロングコース。</p>
+      </div>
+    </div>
+    <p class="system-note fade-up">※料金は現サイトの内容に合わせて差し替えてください。指名料・延長・オプション等の詳細は料金システムページをご覧ください。</p>
+    <div class="sec-more fade-up">
+      <a href="#" class="btn btn-outline">料金の詳細を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ブログ -->
+<section class="blog section section-tinted" id="blog">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">Blog</p>
+      <h2 class="sec-ja">ブログ</h2>
+    </div>
+    <div class="blog-grid">
+      <a href="#" class="blog-card fade-up">
+        <div class="blog-thumb">Photo</div>
+        <div class="blog-body">
+          <time datetime="2026-06-10">2026.06.10</time>
+          <h3>サロンに流れるクラシック、今月のプレイリスト</h3>
+          <p>今月はサティの「ジムノペディ」を中心に、ゆったりと心ほどける選曲でお迎えしています。</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card fade-up">
+        <div class="blog-thumb">Photo</div>
+        <div class="blog-body">
+          <time datetime="2026-06-05">2026.06.05</time>
+          <h3>新人セラピストの研修風景をちょっとだけ</h3>
+          <p>お客様に最高の癒しをお届けできるよう、日々技術研修を重ねています。その様子をご紹介。</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card fade-up">
+        <div class="blog-thumb">Photo</div>
+        <div class="blog-body">
+          <time datetime="2026-06-01">2026.06.01</time>
+          <h3>緑あふれる店内に、新しい観葉植物が仲間入り</h3>
+          <p>白とミントグリーンの空間に、また少し緑が増えました。ご来店の際はぜひ探してみてください。</p>
+        </div>
+      </a>
+    </div>
+    <div class="sec-more fade-up">
+      <a href="#" class="btn btn-outline">ブログをもっと見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 予約CTA -->
+<section class="cta">
+  <div class="cta-inner fade-up">
+    <p class="cta-en">Reservation</p>
+    <h2>ご予約・お問い合わせ</h2>
+    <p class="cta-lead">お電話・LINE・ネット予約にて承っております。<br>はじめての方もお気軽にどうぞ。</p>
+    <div class="cta-btns">
+      <a href="tel:07018404612" class="btn btn-primary btn-lg">☎ 070-1840-4612</a>
+      <a href="#" class="btn btn-line btn-lg">LINEで予約</a>
+      <a href="#" class="btn btn-ghost-light btn-lg">ネット予約</a>
+    </div>
+    <p class="cta-open">営業時間 10:00 - 翌2:00</p>
+  </div>
+</section>
+
+<!-- アクセス -->
+<section class="access section" id="access">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <p class="sec-en">Access</p>
+      <h2 class="sec-ja">アクセス</h2>
+    </div>
+    <div class="access-grid fade-up">
+      <div class="access-map">
+        <div class="map-placeholder">Google Map<br><small>（埋め込みコードを設置してください）</small></div>
+      </div>
+      <dl class="access-info">
+        <div><dt>店名</dt><dd>メンズヒーリングサロン 旋律 -Senritsu-</dd></div>
+        <div><dt>所在地</dt><dd>大阪府岸和田市（詳細はご予約時にご案内します）</dd></div>
+        <div><dt>営業時間</dt><dd>10:00 - 翌2:00</dd></div>
+        <div><dt>電話番号</dt><dd><a href="tel:07018404612">070-1840-4612</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- フッター -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-logo"><span>♪</span> 旋律 <small>-Senritsu-</small></p>
+    <nav class="footer-nav">
+      <ul>
+        <li><a href="#top">トップページ</a></li>
+        <li><a href="#schedule">出勤情報</a></li>
+        <li><a href="#system">料金システム</a></li>
+        <li><a href="#">イベント</a></li>
+        <li><a href="#">ネット予約</a></li>
+        <li><a href="#therapist">セラピスト一覧</a></li>
+        <li><a href="#">レビュー</a></li>
+        <li><a href="#news">新着情報</a></li>
+        <li><a href="#concept">コンセプト</a></li>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#">求人情報</a></li>
+        <li><a href="#blog">BLOG</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© 2026 メンズヒーリングサロン 旋律. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<!-- モバイル固定ナビ -->
+<nav class="mobile-bar">
+  <a href="tel:07018404612"><span>☎</span>電話</a>
+  <a href="#"><span>💬</span>LINE</a>
+  <a href="#"><span>♪</span>予約</a>
+  <a href="#top"><span>↑</span>上へ</a>
+</nav>
+
+<!-- セラピスト詳細プロフィールモーダル -->
+<div class="modal" id="profileModal" aria-hidden="true">
+  <div class="modal-overlay" data-modal-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <button class="modal-close" data-modal-close aria-label="閉じる">×</button>
+    <div class="modal-scroll">
+      <div class="modal-grid">
+        <div class="modal-photo"><span class="photo-placeholder">Photo</span></div>
+        <div class="modal-info">
+          <p class="modal-label">Profile</p>
+          <p class="modal-catch" id="modalCatch"></p>
+          <h3 class="modal-name" id="modalName"></h3>
+          <p class="modal-height" id="modalHeight"></p>
+          <div class="tags modal-tags" id="modalTags"></div>
+          <dl class="modal-qa" id="modalQa"></dl>
+        </div>
+      </div>
+      <div class="modal-comment" id="modalComment"></div>
+      <div class="modal-actions">
+        <a href="#" class="btn btn-primary">この子に会いに行く（ネット予約）</a>
+        <a href="tel:07018404612" class="btn btn-outline">☎ 070-1840-4612</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/therapists.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

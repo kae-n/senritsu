@@ -1,0 +1,719 @@
+/* ==========================================================
+   旋律 -Senritsu- リニューアルデザイン
+   テーマ: クラシック音楽の流れるヒーリングサロン
+   配色: 淡いミントグリーン × 白
+   ========================================================== */
+
+:root {
+  --mint:        #aedcc3;   /* メインの淡いミントグリーン */
+  --mint-mid:    #8cc7aa;   /* 少し濃いミント（ホバー・線） */
+  --mint-pale:   #ddf0e6;   /* 淡いミント（背景・帯） */
+  --mint-mist:   #f2faf5;   /* ほぼ白のミント */
+  --white:       #ffffff;
+  --ivory:       #fcfdfc;
+  --gold:        #c2a96f;   /* アクセント（真鍮・楽器の金） */
+  --green-text:  #46685a;   /* 見出し用のグリーン */
+  --green-label: #6fa388;   /* 英字ラベル用のグリーン */
+  --text:        #4a5c52;
+  --text-light:  #7d8f85;
+  --font-mincho: "Shippori Mincho", serif;
+  --font-en:     "Cormorant Garamond", serif;
+  --font-gothic: "Zen Kaku Gothic New", sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  font-family: var(--font-gothic);
+  color: var(--text);
+  background: var(--ivory);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: opacity .3s; }
+ul { list-style: none; }
+
+/* ---------- ローディング ---------- */
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(160deg, var(--mint-pale), var(--mint));
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .8s, visibility .8s;
+}
+.loader.is-hidden { opacity: 0; visibility: hidden; }
+.loader-inner { text-align: center; color: var(--green-text); }
+.loader-note {
+  display: inline-block; font-size: 3rem;
+  animation: noteFloat 1.6s ease-in-out infinite;
+}
+.loader-text {
+  font-family: var(--font-en); font-size: 1.4rem;
+  letter-spacing: 0.4em; margin-top: .5em; opacity: .8;
+}
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-14px) rotate(6deg); }
+}
+
+/* ---------- ヘッダー ---------- */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--mint-pale);
+  transition: box-shadow .3s;
+}
+.header.is-scrolled { box-shadow: 0 4px 24px rgba(140, 199, 170, 0.18); }
+.header-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; gap: 24px; height: 76px;
+}
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo-mark {
+  display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--mint); color: var(--green-text); font-size: 1.2rem;
+}
+.logo-text {
+  font-family: var(--font-mincho); font-size: 1.5rem;
+  font-weight: 600; color: var(--green-text);
+}
+.logo-text small {
+  font-family: var(--font-en); font-size: .7rem;
+  letter-spacing: .2em; color: var(--green-label); margin-left: 6px;
+}
+.gnav { margin-left: auto; }
+.gnav ul { display: flex; align-items: center; gap: 2px; }
+.gnav a {
+  display: block; padding: 8px 10px; font-size: .85rem;
+  text-align: center; line-height: 1.3; color: var(--text);
+}
+.gnav a span {
+  display: block; font-family: var(--font-en); font-size: .68rem;
+  letter-spacing: .15em; color: var(--green-label); text-transform: uppercase;
+}
+.gnav a:hover { color: var(--green-text); }
+.nav-reserve {
+  background: var(--mint); color: var(--green-text) !important;
+  border-radius: 999px; padding: 10px 22px !important; margin-left: 8px;
+}
+.nav-reserve:hover { background: var(--mint-mid); }
+.nav-reserve-en { color: var(--green-text) !important; opacity: .65; }
+.header-info { display: none; }
+.menu-btn { display: none; }
+
+/* ---------- BGMトグル ---------- */
+.bgm-toggle {
+  position: fixed; right: 20px; bottom: 90px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid var(--mint-mid);
+  background: var(--white); color: var(--green-text); cursor: pointer;
+  display: grid; place-items: center; gap: 0;
+  box-shadow: 0 4px 16px rgba(140,199,170,.3);
+  transition: transform .3s, background .3s;
+}
+.bgm-toggle:hover { transform: scale(1.08); }
+.bgm-toggle.is-playing { background: var(--mint); }
+.bgm-toggle.is-playing .bgm-icon { animation: noteFloat 1.6s ease-in-out infinite; }
+.bgm-icon { font-size: 1.2rem; line-height: 1; }
+.bgm-label { font-family: var(--font-en); font-size: .55rem; letter-spacing: .15em; }
+
+/* ---------- ヒーロー ---------- */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--white) 0%, var(--mint-mist) 35%, var(--mint-pale) 75%, var(--mint) 130%);
+  padding: 120px 24px 80px;
+}
+.hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.hero-leaf {
+  position: absolute; border-radius: 50% 0;
+  background: radial-gradient(circle at 30% 30%, rgba(140,199,170,.3), rgba(174,220,195,.08));
+  filter: blur(2px);
+}
+.hero-leaf-1 { width: 420px; height: 420px; top: -120px; right: -100px; transform: rotate(25deg); }
+.hero-leaf-2 { width: 320px; height: 320px; bottom: -80px; left: -90px; transform: rotate(-160deg); }
+
+/* 五線譜 */
+.staff-lines {
+  position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%) rotate(-4deg) scale(1.1);
+  display: grid; gap: 26px; opacity: .5;
+}
+.staff-lines span {
+  display: block; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mint-mid) 20%, var(--mint-mid) 80%, transparent);
+}
+
+/* 浮遊する音符 */
+.floating-notes i {
+  position: absolute; font-style: normal;
+  color: var(--mint-mid); opacity: 0;
+  animation: floatNote 14s linear infinite;
+}
+.floating-notes i:nth-child(1) { left: 8%;  font-size: 1.6rem; animation-delay: 0s; }
+.floating-notes i:nth-child(2) { left: 22%; font-size: 1.1rem; animation-delay: 2.5s; }
+.floating-notes i:nth-child(3) { left: 45%; font-size: 1.4rem; animation-delay: 5s; }
+.floating-notes i:nth-child(4) { left: 63%; font-size: 1rem;   animation-delay: 7.5s; }
+.floating-notes i:nth-child(5) { left: 78%; font-size: 1.7rem; animation-delay: 10s; }
+.floating-notes i:nth-child(6) { left: 90%; font-size: 1.2rem; animation-delay: 12s; }
+@keyframes floatNote {
+  0%   { bottom: -5%; opacity: 0; transform: translateX(0) rotate(0); }
+  10%  { opacity: .7; }
+  90%  { opacity: .4; }
+  100% { bottom: 105%; opacity: 0; transform: translateX(40px) rotate(20deg); }
+}
+
+.hero-content { position: relative; text-align: center; max-width: 760px; }
+.hero-sub {
+  font-family: var(--font-en); font-size: .95rem;
+  letter-spacing: .35em; color: var(--green-label); text-transform: uppercase;
+  margin-bottom: 1.5em;
+}
+.hero-title {
+  font-family: var(--font-mincho); font-weight: 500;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  color: var(--green-text); line-height: 1.7;
+}
+.hero-title-line { display: block; }
+.hero-lead {
+  margin-top: 2em; color: var(--text-light); font-size: .95rem;
+}
+.hero-btns {
+  margin-top: 2.5em; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.hero-scroll {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-en); font-size: .75rem; letter-spacing: .3em;
+  color: var(--green-label); writing-mode: vertical-rl;
+}
+.hero-scroll::after {
+  content: ""; display: block; width: 1px; height: 44px;
+  background: var(--green-label); margin: 10px auto 0;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- 共通 ---------- */
+.section { padding: 110px 0; }
+.section-tinted { background: var(--mint-mist); }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: 840px; }
+
+.sec-head { text-align: center; margin-bottom: 60px; }
+.sec-en {
+  font-family: var(--font-en); font-size: 2.4rem; font-weight: 400;
+  color: var(--green-label); letter-spacing: .12em; line-height: 1;
+}
+.sec-ja {
+  font-family: var(--font-mincho); font-size: 1rem; font-weight: 500;
+  color: var(--text-light); margin-top: .8em;
+}
+.sec-ja::before {
+  content: "♪"; color: var(--gold); margin-right: .6em; font-size: .85em;
+}
+.sec-more { text-align: center; margin-top: 48px; }
+
+/* ボタン */
+.btn {
+  display: inline-block; padding: 14px 38px; border-radius: 999px;
+  font-size: .9rem; letter-spacing: .1em; transition: all .3s;
+}
+.btn-lg { padding: 17px 44px; font-size: 1rem; }
+.btn-primary {
+  background: var(--mint); color: var(--green-text);
+  box-shadow: 0 6px 20px rgba(140,199,170,.45);
+}
+.btn-primary:hover { background: var(--mint-mid); transform: translateY(-2px); }
+.btn-outline {
+  border: 1px solid var(--mint-mid); color: var(--green-text);
+}
+.btn-outline:hover { background: var(--mint-pale); }
+.btn-ghost {
+  border: 1px solid var(--mint-mid); color: var(--green-text); background: rgba(255,255,255,.6);
+}
+.btn-ghost:hover { background: var(--white); }
+.btn-line {
+  background: #06c755; color: var(--white);
+  box-shadow: 0 6px 20px rgba(6,199,85,.3);
+}
+.btn-line:hover { filter: brightness(1.08); transform: translateY(-2px); }
+
+/* スクロールフェード */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.fade-up.is-visible { opacity: 1; transform: none; }
+
+/* ---------- コンセプト ---------- */
+.concept-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start;
+}
+.concept-catch {
+  font-family: var(--font-mincho); font-weight: 500;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem); color: var(--green-text);
+  line-height: 2; margin-bottom: 1.2em;
+}
+.concept-text p { margin-bottom: 1.4em; color: var(--text-light); font-size: .95rem; }
+.concept-features { display: grid; gap: 20px; }
+.feature-card {
+  background: var(--white); border-radius: 16px; padding: 28px 30px;
+  border: 1px solid var(--mint-pale);
+  box-shadow: 0 8px 30px rgba(140,199,170,.14);
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; align-items: center;
+}
+.feature-icon {
+  grid-row: span 2; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--mint-pale); color: var(--green-text); font-size: 1.3rem;
+}
+.feature-card h4 { font-family: var(--font-mincho); color: var(--green-text); font-size: 1.05rem; }
+.feature-card p { font-size: .85rem; color: var(--text-light); line-height: 1.7; }
+
+/* ---------- タグ ---------- */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: .68rem; letter-spacing: .04em; line-height: 1.5;
+  background: var(--mint-pale); color: var(--green-text);
+  border-radius: 999px; padding: 2px 11px;
+}
+
+/* ---------- 出勤情報 ---------- */
+.schedule-list {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 440px));
+  gap: 28px; justify-content: center;
+}
+.schedule-card {
+  display: grid; grid-template-columns: 130px 1fr;
+  background: var(--white); border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--mint-pale);
+  box-shadow: 0 10px 34px rgba(140,199,170,.18);
+  transition: transform .3s, box-shadow .3s;
+}
+.schedule-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(140,199,170,.3); }
+.schedule-photo, .t-photo {
+  background: linear-gradient(150deg, var(--mint-pale), var(--mint));
+  display: grid; place-items: center; min-height: 160px;
+}
+.photo-placeholder {
+  font-family: var(--font-en); color: var(--green-label); letter-spacing: .2em; font-size: .8rem;
+}
+.schedule-body { padding: 20px 24px; }
+.schedule-status {
+  display: inline-block; font-size: .7rem; letter-spacing: .1em;
+  background: var(--mint); color: var(--green-text);
+  border-radius: 999px; padding: 3px 14px; margin-bottom: 8px;
+}
+.schedule-name {
+  font-family: var(--font-mincho); font-size: 1.2rem; color: var(--green-text);
+}
+.schedule-name small, .t-card small { font-size: .75em; color: var(--text-light); font-weight: 400; }
+.schedule-meta { font-size: .8rem; color: var(--text-light); }
+.schedule-time { margin: 4px 0 10px; color: var(--green-text); font-weight: 500; letter-spacing: .08em; }
+
+/* ---------- セラピスト ---------- */
+.therapist-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+}
+.t-card {
+  background: var(--white); border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--mint-pale); text-align: center;
+  box-shadow: 0 8px 26px rgba(140,199,170,.14);
+  transition: transform .3s, box-shadow .3s;
+  padding-bottom: 20px;
+}
+.t-card:hover { transform: translateY(-5px); box-shadow: 0 16px 38px rgba(140,199,170,.28); }
+.t-photo { aspect-ratio: 3 / 4; margin-bottom: 14px; }
+.t-card h3 { font-family: var(--font-mincho); font-size: 1.05rem; color: var(--green-text); }
+.t-card .t-height { font-size: .78rem; color: var(--text-light); }
+.t-card .tags { justify-content: center; padding: 10px 14px 0; }
+.t-comment {
+  font-size: .76rem; color: var(--text-light); line-height: 1.7;
+  text-align: left; padding: 10px 18px 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* ---------- 料金 ---------- */
+.system-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; align-items: stretch;
+}
+.system-card {
+  position: relative; background: var(--white); border-radius: 18px;
+  border: 1px solid var(--mint-pale); padding: 40px 30px; text-align: center;
+  box-shadow: 0 8px 26px rgba(140,199,170,.14);
+}
+.system-card-featured {
+  border: 2px solid var(--mint-mid);
+  box-shadow: 0 16px 44px rgba(140,199,170,.32);
+  transform: scale(1.03);
+}
+.system-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: var(--white); font-size: .72rem;
+  letter-spacing: .12em; border-radius: 999px; padding: 4px 18px; white-space: nowrap;
+}
+.system-course-en {
+  font-family: var(--font-en); font-size: 1.1rem; color: var(--gold);
+  letter-spacing: .2em; font-style: italic;
+}
+.system-card h3 {
+  font-family: var(--font-mincho); color: var(--green-text);
+  font-size: 1.2rem; margin: .3em 0 .8em;
+}
+.system-time {
+  display: inline-block; background: var(--mint-pale); color: var(--green-text);
+  font-size: .8rem; border-radius: 999px; padding: 3px 18px;
+}
+.system-price {
+  font-family: var(--font-en); font-size: 2.2rem; color: var(--green-text);
+  margin: .4em 0 .3em;
+}
+.system-price small { font-size: .75rem; font-family: var(--font-gothic); color: var(--text-light); }
+.system-desc { font-size: .85rem; color: var(--text-light); line-height: 1.8; }
+.system-note { text-align: center; margin-top: 36px; font-size: .78rem; color: var(--text-light); }
+
+/* ---------- 新着情報 ---------- */
+.news-list { border-top: 1px solid var(--mint-pale); }
+.news-list li { border-bottom: 1px solid var(--mint-pale); }
+.news-list a {
+  display: flex; align-items: center; gap: 22px; padding: 22px 10px;
+  transition: background .3s;
+}
+.news-list a:hover { background: var(--mint-mist); }
+.news-list time {
+  font-family: var(--font-en); color: var(--green-label); font-size: .9rem;
+  letter-spacing: .08em; flex-shrink: 0;
+}
+.news-tag {
+  flex-shrink: 0; font-size: .7rem; letter-spacing: .08em;
+  border: 1px solid var(--mint-mid); color: var(--green-text);
+  border-radius: 999px; padding: 2px 14px;
+}
+.news-tag-event { border-color: var(--gold); color: var(--gold); }
+.news-list p { font-size: .9rem; }
+
+/* ---------- ブログ ---------- */
+.blog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+}
+.blog-card {
+  background: var(--white); border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--mint-pale);
+  box-shadow: 0 8px 26px rgba(140,199,170,.14);
+  transition: transform .3s, box-shadow .3s;
+  display: block;
+}
+.blog-card:hover { transform: translateY(-5px); box-shadow: 0 16px 38px rgba(140,199,170,.28); }
+.blog-thumb {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(150deg, var(--mint-pale), var(--mint));
+  display: grid; place-items: center;
+  font-family: var(--font-en); color: var(--green-label); letter-spacing: .2em; font-size: .8rem;
+}
+.blog-body { padding: 20px 22px 24px; }
+.blog-body time {
+  font-family: var(--font-en); font-size: .82rem; color: var(--green-label); letter-spacing: .08em;
+}
+.blog-body h3 {
+  font-family: var(--font-mincho); font-size: 1rem; font-weight: 500;
+  color: var(--green-text); margin: .4em 0 .5em; line-height: 1.7;
+}
+.blog-body p { font-size: .82rem; color: var(--text-light); line-height: 1.8; }
+
+/* ---------- CTA ---------- */
+.cta {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255,255,255,.55), transparent 55%),
+    radial-gradient(ellipse at 85% 100%, rgba(194,169,111,.16), transparent 50%),
+    linear-gradient(160deg, var(--mint-pale), var(--mint));
+  color: var(--green-text); text-align: center; padding: 100px 24px;
+}
+.cta-en {
+  font-family: var(--font-en); letter-spacing: .3em; font-size: .9rem;
+  color: var(--green-label); text-transform: uppercase;
+}
+.cta h2 { font-family: var(--font-mincho); font-size: 1.8rem; font-weight: 500; margin: .4em 0 1em; }
+.cta-lead { color: var(--text); font-size: .95rem; margin-bottom: 2.4em; }
+.cta-btns { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.cta .btn-primary { background: var(--white); color: var(--green-text); box-shadow: 0 6px 20px rgba(70,104,90,.18); }
+.cta .btn-primary:hover { background: var(--mint-mist); }
+.btn-ghost-light {
+  border: 1px solid var(--green-text); color: var(--green-text);
+}
+.btn-ghost-light:hover { background: rgba(255,255,255,.4); }
+.cta-open { margin-top: 2.4em; font-size: .85rem; letter-spacing: .15em; color: var(--text); opacity: .75; }
+
+/* ---------- アクセス ---------- */
+.access-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+.map-placeholder {
+  aspect-ratio: 16 / 10; border-radius: 18px;
+  background: linear-gradient(150deg, var(--mint-pale), var(--mint));
+  display: grid; place-items: center; text-align: center;
+  color: var(--green-label); font-family: var(--font-en); letter-spacing: .15em;
+}
+.map-placeholder small { font-family: var(--font-gothic); letter-spacing: .05em; }
+.access-info div {
+  display: grid; grid-template-columns: 110px 1fr; gap: 16px;
+  padding: 16px 4px; border-bottom: 1px solid var(--mint-pale);
+}
+.access-info dt {
+  font-family: var(--font-mincho); color: var(--green-label); font-size: .9rem;
+}
+.access-info dd { font-size: .92rem; }
+.access-info a { color: var(--green-text); text-decoration: underline; }
+
+/* ---------- プロフィールモーダル ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center; padding: 24px;
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s, visibility .35s;
+}
+.modal.is-open { opacity: 1; visibility: visible; }
+.modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(70, 104, 90, .45);
+  backdrop-filter: blur(4px);
+}
+.modal-panel {
+  position: relative; width: min(860px, 100%); max-height: min(86vh, 100%);
+  background: var(--ivory); border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(40, 70, 56, .35);
+  transform: translateY(24px) scale(.98);
+  transition: transform .35s;
+  display: flex; overflow: hidden;
+}
+.modal.is-open .modal-panel { transform: none; }
+.modal-scroll { overflow-y: auto; padding: 48px 44px 40px; width: 100%; }
+.modal-close {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--mint-mid); background: var(--white);
+  color: var(--green-text); font-size: 1.3rem; cursor: pointer;
+  transition: background .3s;
+}
+.modal-close:hover { background: var(--mint-pale); }
+.modal-grid {
+  display: grid; grid-template-columns: 280px 1fr; gap: 36px; align-items: start;
+}
+.modal-photo {
+  aspect-ratio: 3 / 4; border-radius: 16px; overflow: hidden;
+  background: linear-gradient(150deg, var(--mint-pale), var(--mint));
+  display: grid; place-items: center;
+  position: sticky; top: 0;
+}
+.modal-label {
+  font-family: var(--font-en); font-size: 1.3rem; color: var(--green-label);
+  letter-spacing: .25em; line-height: 1;
+}
+.modal-catch {
+  font-family: var(--font-mincho); color: var(--green-text);
+  font-size: .95rem; margin-top: 1.2em; line-height: 1.8;
+}
+.modal-name {
+  font-family: var(--font-mincho); font-size: 1.7rem; font-weight: 500;
+  color: var(--green-text); margin-top: .3em; line-height: 1.4;
+}
+.modal-name small { font-size: .6em; color: var(--text-light); font-weight: 400; }
+.modal-height { font-size: .85rem; color: var(--text-light); margin-bottom: 10px; }
+.modal-qa { margin-top: 22px; border-top: 1px solid var(--mint-pale); }
+.modal-qa div {
+  display: grid; grid-template-columns: 150px 1fr; gap: 14px;
+  padding: 9px 2px; border-bottom: 1px solid var(--mint-pale);
+  font-size: .84rem;
+}
+.modal-qa dt { color: var(--green-label); font-weight: 500; }
+.modal-qa dd { color: var(--text); }
+.modal-comment {
+  margin-top: 34px; background: var(--mint-mist);
+  border-radius: 16px; padding: 26px 30px;
+}
+.modal-comment p { font-size: .9rem; line-height: 2; color: var(--text); }
+.modal-comment p + p { margin-top: .6em; }
+.modal-comment p:first-child::before {
+  content: "♪ "; color: var(--gold);
+}
+.modal-actions {
+  margin-top: 30px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+
+/* カードがクリックできることを示す */
+.t-card[data-id] { cursor: pointer; }
+.t-card[data-id]:focus-visible { outline: 2px solid var(--mint-mid); outline-offset: 3px; }
+
+/* ---------- セラピスト個別ページ ---------- */
+.profile-page { padding-top: 76px; }
+.breadcrumb {
+  font-size: .78rem; color: var(--text-light);
+  padding: 18px 0;
+}
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+.breadcrumb li + li::before { content: "›"; margin-right: 6px; color: var(--mint-mid); }
+.breadcrumb a { color: var(--green-label); }
+.breadcrumb a:hover { text-decoration: underline; }
+.profile-detail { padding: 30px 0 90px; }
+.profile-detail .modal-photo { position: static; }
+.profile-other {
+  margin-top: 60px; text-align: center;
+}
+
+/* ---------- 週間出勤スケジュール ---------- */
+.schedule-week { padding: 20px 0 90px; }
+.day-tabs {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px;
+  margin: 36px 0 44px;
+}
+.day-tab {
+  position: relative; cursor: pointer;
+  background: var(--white); border: 1px solid var(--mint-pale);
+  border-radius: 14px; padding: 14px 4px 12px; text-align: center;
+  font-family: var(--font-gothic); color: var(--text);
+  box-shadow: 0 4px 14px rgba(140,199,170,.12);
+  transition: background .3s, transform .3s, border-color .3s;
+}
+.day-tab:hover { transform: translateY(-2px); border-color: var(--mint-mid); }
+.day-tab.is-active {
+  background: var(--mint); border-color: var(--mint-mid);
+  box-shadow: 0 8px 22px rgba(140,199,170,.4);
+}
+.day-tab .dt-date {
+  display: block; font-family: var(--font-en);
+  font-size: 1.35rem; line-height: 1.2; color: var(--green-text);
+}
+.day-tab .dt-wd {
+  display: block; font-size: .78rem; color: var(--text-light); margin-top: 2px;
+}
+.day-tab.is-active .dt-wd { color: var(--green-text); }
+.day-tab .dt-wd small {
+  font-family: var(--font-en); font-size: .85em; letter-spacing: .08em;
+}
+.day-tab .dt-today {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: var(--white);
+  font-size: .62rem; letter-spacing: .1em;
+  border-radius: 999px; padding: 1px 10px; white-space: nowrap;
+}
+.day-heading {
+  font-family: var(--font-mincho); font-weight: 500;
+  font-size: 1.25rem; color: var(--green-text);
+  text-align: center; margin-bottom: 30px;
+}
+.day-heading::before { content: "♪ "; color: var(--gold); font-size: .85em; }
+.day-empty {
+  grid-column: 1 / -1; text-align: center;
+  color: var(--text-light); padding: 50px 0;
+}
+
+@media (max-width: 760px) {
+  .day-tabs {
+    grid-template-columns: repeat(7, minmax(72px, 1fr));
+    overflow-x: auto; padding: 12px 2px 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .day-tab { padding: 10px 2px 8px; }
+  .day-tab .dt-date { font-size: 1.1rem; }
+}
+
+/* ---------- フッター ---------- */
+.footer { background: var(--mint-mist); border-top: 1px solid var(--mint-pale); padding: 70px 24px 110px; }
+.footer-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
+.footer-logo {
+  font-family: var(--font-mincho); font-size: 1.5rem; color: var(--green-text);
+}
+.footer-logo span { color: var(--green-label); margin-right: 4px; }
+.footer-logo small { font-family: var(--font-en); font-size: .65rem; letter-spacing: .2em; color: var(--green-label); }
+.footer-nav { margin: 32px 0; }
+.footer-nav ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 26px; }
+.footer-nav a { font-size: .82rem; color: var(--text-light); }
+.footer-nav a:hover { color: var(--green-text); }
+.footer-copy { font-size: .72rem; color: var(--text-light); letter-spacing: .08em; }
+
+/* ---------- モバイル固定バー ---------- */
+.mobile-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+  display: none; grid-template-columns: repeat(4, 1fr);
+  background: rgba(255,255,255,.95); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--mint-pale);
+}
+.mobile-bar a {
+  text-align: center; padding: 9px 0 11px; font-size: .68rem; color: var(--green-text);
+}
+.mobile-bar a span { display: block; font-size: 1.1rem; color: var(--green-label); }
+
+/* ==========================================================
+   レスポンシブ
+   ========================================================== */
+@media (min-width: 1140px) {
+  .header-info { display: block; text-align: right; line-height: 1.4; }
+  .header-open { font-size: .68rem; letter-spacing: .1em; color: var(--text-light); }
+  .header-tel { font-family: var(--font-en); font-size: 1.15rem; color: var(--green-text); }
+}
+
+@media (max-width: 960px) {
+  .gnav {
+    position: fixed; inset: 0; background: var(--mint-mist);
+    display: grid; place-items: center;
+    opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
+    margin-left: 0;
+  }
+  .gnav.is-open { opacity: 1; visibility: visible; }
+  .gnav ul { flex-direction: column; gap: 12px; text-align: center; }
+  .gnav a { font-size: 1.05rem; }
+  .menu-btn {
+    display: grid; gap: 6px; margin-left: auto;
+    background: none; border: none; cursor: pointer; padding: 10px; z-index: 110;
+  }
+  .menu-btn span {
+    display: block; width: 26px; height: 2px; background: var(--green-text);
+    transition: transform .3s, opacity .3s;
+  }
+  .menu-btn.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .menu-btn.is-open span:nth-child(2) { opacity: 0; }
+  .menu-btn.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .concept-grid, .access-grid { grid-template-columns: 1fr; gap: 40px; }
+  .therapist-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .system-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; gap: 32px; }
+  .system-card-featured { transform: none; }
+  .blog-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .section { padding: 80px 0; }
+  .mobile-bar { display: grid; }
+  .bgm-toggle { bottom: 76px; right: 14px; width: 50px; height: 50px; }
+  .footer { padding-bottom: 130px; }
+}
+
+@media (max-width: 760px) {
+  .modal { padding: 12px; }
+  .modal-scroll { padding: 56px 22px 30px; }
+  .modal-grid { grid-template-columns: 1fr; gap: 24px; }
+  .modal-photo { max-width: 240px; margin: 0 auto; position: static; }
+  .modal-qa div { grid-template-columns: 120px 1fr; }
+}
+
+@media (max-width: 560px) {
+  .news-list a { flex-wrap: wrap; gap: 10px 14px; }
+  .news-list p { width: 100%; }
+  .schedule-card { grid-template-columns: 110px 1fr; }
+  .hero-btns .btn { width: 100%; max-width: 320px; }
+  .cta-btns .btn { width: 100%; max-width: 340px; }
+  .t-card .tags { padding: 8px 10px 0; }
+}
+
+/* アニメーションを減らす設定のユーザーへの配慮 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up { transition: none; opacity: 1; transform: none; }
+  .floating-notes i, .loader-note, .hero-scroll::after { animation: none; }
+}

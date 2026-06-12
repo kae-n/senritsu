@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>出勤情報（週間スケジュール） | 旋律 -Senritsu- 岸和田のメンズヒーリングサロン</title>
+<meta name="description" content="岸和田のメンズヒーリングサロン「旋律」の出勤情報。本日から1週間分のセラピスト出勤スケジュールをご覧いただけます。">
+<link rel="canonical" href="https://senritu.jp/schedule.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://senritu.jp/schedule.html">
+<meta property="og:title" content="出勤情報（週間スケジュール) | 旋律 -Senritsu-">
+<meta property="og:description" content="本日から1週間分のセラピスト出勤スケジュールをご覧いただけます。">
+<meta property="og:image" content="https://senritu.jp/ogp.jpg">
+<meta property="og:site_name" content="メンズヒーリングサロン 旋律">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="profile-page">
+
+<header class="header is-scrolled" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">♪</span>
+      <span class="logo-text">旋律<small>-Senritsu-</small></span>
+    </a>
+    <nav class="gnav" id="gnav">
+      <ul>
+        <li><a href="index.html"><span>Top</span>トップ</a></li>
+        <li><a href="schedule.html"><span>Schedule</span>出勤情報</a></li>
+        <li><a href="index.html#news"><span>News</span>新着情報</a></li>
+        <li><a href="index.html#therapist"><span>Therapist</span>セラピスト</a></li>
+        <li><a href="index.html#system"><span>System</span>料金システム</a></li>
+        <li><a href="index.html#access"><span>Access</span>アクセス</a></li>
+        <li><a href="#" class="nav-reserve">ご予約<span class="nav-reserve-en">Reserve</span></a></li>
+      </ul>
+    </nav>
+    <div class="header-info">
+      <p class="header-open">OPEN 10:00 - 翌2:00</p>
+      <a href="tel:07018404612" class="header-tel">070-1840-4612</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <ol>
+        <li><a href="index.html">トップページ</a></li>
+        <li>出勤情報</li>
+      </ol>
+    </nav>
+
+    <section class="schedule-week">
+      <div class="sec-head">
+        <p class="sec-en">Schedule</p>
+        <h1 class="sec-ja">出勤情報</h1>
+      </div>
+
+      <!-- 日付タブ（本日から7日分） -->
+      <div class="day-tabs" id="dayTabs" role="tablist" aria-label="日付を選択"></div>
+
+      <h2 class="day-heading" id="dayHeading"></h2>
+      <div class="schedule-list day-list" id="dayList"></div>
+
+      <p class="system-note">※本日以外の出勤情報はデモ用のサンプルです。本番ではシステムの出勤データと連動させます。</p>
+
+      <div class="sec-more">
+        <a href="index.html#therapist" class="btn btn-outline">セラピスト一覧を見る</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-logo"><span>♪</span> 旋律 <small>-Senritsu-</small></p>
+    <p class="footer-copy">© 2026 メンズヒーリングサロン 旋律. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<script src="js/therapists.js"></script>
+<script src="js/schedule.js"></script>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const gnav = document.getElementById('gnav');
+menuBtn.addEventListener('click', () => {
+  const open = gnav.classList.toggle('is-open');
+  menuBtn.classList.toggle('is-open', open);
+});
+</script>
+</body>
+</html>
